@@ -10,10 +10,10 @@ var app = function(){
     var Bili_live = require('./bili-live.js');
     var liveid;
     var config={
-        "showTime":['t',false,'发射时间'],
+        "showTime":['t',true,'发射时间'],
         "showUserName":['u',true,'弹幕发送者'],
         "showWelcome":['w',true,'欢迎信息'],
-        "notify":['n',false,'弹幕提示'],
+        "notify":['n',true,'弹幕提示'],
     };
     var notify=true;
     var child_process = require('child_process');
@@ -23,9 +23,9 @@ var app = function(){
     var screen,cmtBox,liveid,viewNum;
     var intervals=[];
     var postag=[['topleft','上左'],['topmid','上中'],['topright','上右'],['botleft','下左'],['botmid','下中'],['botright','下右']];
-    var curpos=0;
+    var curpos=4;
     var notconf={loc:postag[curpos][0],
-        size:16
+        size:25
     };
     var cwd;
     var footer;
@@ -477,9 +477,10 @@ var app = function(){
                         libnotify.notify(text,notconf);
                     }
                     break;
-                default:
-                    cmtBox.insertLine(0,JSON.stringify(data,null,2));
-                    cmtBox.insertLine(0,"[弹幕] ".bold.green + "空弹幕".red);
+            default:
+		text = 1; 	// disable it!
+                    // cmtBox.insertLine(0,JSON.stringify(data,null,2));
+                    // cmtBox.insertLine(0,"[弹幕] ".bold.green + "空弹幕".red);
             }
 
         });
